@@ -115,13 +115,16 @@ footer {
   color: #bbb;
   padding: 2em 0;
   text-align: right;
-  text-shadow: 0 1px 0 #333;
+  text-shadow: 0 1px 0 #555;
 }
-footer small {
-  display: block;
-  float: left;
-  text-align: left;
-}
+  footer small {
+    display: block;
+    float: left;
+    text-align: left;
+  }
+  footer a { color: #ddd; }
+  footer a:visited { color: #ccc; }
+  footer a:hover { color: #fff; }
 
 .status {
   background-image: url('img/sprite.png');
@@ -154,10 +157,12 @@ section div ol {
   section div ol li .status {
     height: 25px;
   }
-  section div ol li .no {
+  section div ol li .no,
+  section div ul li.no {
     background-position: 2px -300px;
   }
-  section div ol li .yes {
+  section div ol li .yes,
+  section div ul li.yes {
     background-position: 2px -392px;
   }
 
@@ -165,16 +170,20 @@ section div ol {
 section div ul {
   list-style-type: none;
   margin: 0 auto;
-  padding: 20px 0;
-  text-align: center;
-  width: 200px;
+  padding: 20px 0 0;
+  width: 120px;
 }
-  section div ul em.status {
-    text-indent: 0;
+  section div ul .status {
+    min-height: 25px;
+    padding: 5px 0;
   }
-  section div ul em.status span {
-    display: block;
-    text-indent: -9999px;
+  section div ul .status em {
+    display: none;
+  }
+  section div ul .status,
+  section div ul .status em span {
+    text-indent: 0;
+    text-align: right;
   }
 
 
