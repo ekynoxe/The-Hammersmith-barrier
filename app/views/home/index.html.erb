@@ -1,21 +1,27 @@
 <% content_for :head do %>
   <h1>Is the Hammersmith bridge barrier operational today?</h1>
-  <!--em class="status main_status no">No</em-->
+  <% if @today_status %>
+    <em class="status main_status <%= status_class(@today_status) %>"><%= status_class(@today_status).capitalize %></em>
+  <% else %>
+    <em class="status main_status maybe">Maybe</em>
+  <% end %>
 <% end %>
 
-<h1>Coming soon</h1>
-<!--h2>What about the previous days?</h2>
+<h2>What about the previous days?</h2>
 <ol class="clearfix">
-  <li><em class="status no">No</em><span class="date">03/05/2012</span><span class="time">8:50am</span></li>
+  <% @statuses.each do |s| %>
+    <li><em class="status <%= status_class(s) %>"><%= status_class(s).capitalize %></em><span class="date"><%= s.date.strftime("%m/%d/%Y") %></span><span class="time"><%= s.time.strftime("%I:%M%p").downcase! %></span></li>
+  <% end %>
+  <!--li><em class="status no">No</em><span class="date">03/05/2012</span><span class="time">8:50am</span></li>
   <li><em class="status no">No</em><span class="date">04/05/2012</span><span class="time">8:45am</span></li>
   <li><em class="status yes">Yes</em><span class="date">05/05/2012</span><span class="time">8:12am</span></li>
   <li><em class="status no">No</em><span class="date">06/05/2012</span><span class="time">8:59am</span></li>
   <li><em class="status no">No</em><span class="date">07/05/2012</span><span class="time">8:42am</span></li>
   <li><em class="status no">No</em><span class="date">08/05/2012</span><span class="time">8:39am</span></li>
-  <li><em class="status no">No</em><span class="date">09/05/2012</span><span class="time">8:24am</span></li>
+  <li><em class="status no">No</em><span class="date">09/05/2012</span><span class="time">8:24am</span></li-->
 </ol>
 <h2>Stats since records begun <small>(02/2012)</small></h2>
 <ul class="clearfix">
-  <li class="status no"><em>No</em><span>87%</span></li>
-  <li class="status yes"><em>Yes</em><span>13%</span></li>
-</ul-->
+  <li class="status no"><em>No</em><span><%= number_to_percentage(@no_percent, :precision => 2) %></span></li>
+  <li class="status yes"><em>Yes</em><span><%= number_to_percentage(@yes_percent, :precision => 2) %></span></li>
+</ul>

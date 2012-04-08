@@ -134,11 +134,13 @@ footer {
 }
 
 .main_status {
-  background-position: 0 0;
   margin: 40px auto;
-  height: 75px;
+  height: 85px;
   width: 220px;
 }
+header div em.no { background-position: 0 17px; }
+header div em.yes { background-position: 0 -141px; }
+header div em.maybe { background-position: 0 -285px; }
 
 section div ol {
   list-style-type: none;
@@ -159,11 +161,11 @@ section div ol {
   }
   section div ol li .no,
   section div ul li.no {
-    background-position: 2px -300px;
+    background-position: 2px -450px;
   }
   section div ol li .yes,
   section div ul li.yes {
-    background-position: 2px -392px;
+    background-position: 2px -542px;
   }
 
 
@@ -171,7 +173,7 @@ section div ul {
   list-style-type: none;
   margin: 0 auto;
   padding: 20px 0 0;
-  width: 120px;
+  width: 135px;
 }
   section div ul .status {
     min-height: 25px;

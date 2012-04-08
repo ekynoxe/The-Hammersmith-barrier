@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  status: false
+  date: 2012-04-05
+  time: 2012-04-05 17:18:20
+
+two:
+  status: false
+  date: 2012-04-05
+  time: 2012-04-05 17:18:20
