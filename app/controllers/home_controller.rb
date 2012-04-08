@@ -8,8 +8,8 @@ class HomeController < ApplicationController
     	yes = Status.count(:all,:conditions=>['status=?','t'])
     	no = Status.count(:all,:conditions=>['status=?','f'])
     	if 0 != yes+no
-    		@yes_percent = 100 * yes / (yes + no)
-    		@no_percent = 100 * no / (yes + no)
+    		@yes_percent = 100.00 * yes / (yes + no)
+    		@no_percent = 100.00 * no / (yes + no)
     	else
     		@yes_percent = 0
     		@no_percent = 0

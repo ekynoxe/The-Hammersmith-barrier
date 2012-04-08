@@ -22,6 +22,6 @@
 </ol>
 <h2>Stats since records begun <small>(02/2012)</small></h2>
 <ul class="clearfix">
-  <li class="status no"><em>No</em><span><%= number_to_percentage(@no_percent, :precision => 2) %></span></li>
-  <li class="status yes"><em>Yes</em><span><%= number_to_percentage(@yes_percent, :precision => 2) %></span></li>
+  <li class="status no"><em>No</em><span><%= number_to_percentage(@no_percent, :precision => 2, :strip_insignificant_zeros => true) %></span></li>
+  <li class="status yes"><em>Yes</em><span><%= number_to_percentage(@yes_percent, :precision => 2, :strip_insignificant_zeros => true) %></span></li>
 </ul>
