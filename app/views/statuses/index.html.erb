@@ -17,7 +17,7 @@
     <td><%= status.time %></td>
     <td><%= link_to 'Show', status %></td>
     <td><%= link_to 'Edit', edit_status_path(status) %></td>
-    <td><%= link_to 'Destroy', status, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= button_to 'Destroy', status, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
