@@ -4,7 +4,7 @@ class StatusesController < ApplicationController
   # GET /statuses
   # GET /statuses.json
   def index
-    @statuses = Status.all
+    @statuses = Status.find(:all, :order => "date desc", :limit => 7).reverse
 
     respond_to do |format|
       format.html # index.html.erb

@@ -10,7 +10,7 @@
 <h2>What about the previous days?</h2>
 <ol class="clearfix">
   <% @statuses.each do |s| %>
-    <li><em class="status <%= status_class(s) %>"><%= status_class(s).capitalize %></em><span class="date"><%= s.date.strftime("%m/%d/%Y") %></span><span class="time"><%= s.time.strftime("%I:%M%p").downcase! %></span></li>
+    <li><em class="status <%= status_class(s) %>"><%= status_class(s).capitalize %></em><span class="date"><%= s.date.strftime("%d/%m/%Y") %></span><span class="time"><%= s.time.strftime("%I:%M%p").downcase! %></span></li>
   <% end %>
   <!--li><em class="status no">No</em><span class="date">03/05/2012</span><span class="time">8:50am</span></li>
   <li><em class="status no">No</em><span class="date">04/05/2012</span><span class="time">8:45am</span></li>
