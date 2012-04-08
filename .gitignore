@@ -1,5 +1,4 @@
 .DS_*
-db/*
 log/*
 tmp/*
 config/initializers/user_auth.rb
