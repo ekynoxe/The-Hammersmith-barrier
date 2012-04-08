@@ -2,8 +2,7 @@ class HomeController < ApplicationController
     def index 
     	@statuses = Status.find(:all, :order => "date desc", :limit => 7).reverse
     	@today_status = Status.find(:first, :conditions => ["DATE(date) = DATE(?)", Time.now], :limit => 1)
-        # TODO: finf oldest status to automatically display on home page (not hardcoded)
-        #@oldest_status = Status.find(:first, :limit => 1)
+        @oldest_status = Status.first(:order => "date asc")
     	
     	yes = Status.count(:all,:conditions=>['status=?','t'])
     	no = Status.count(:all,:conditions=>['status=?','f'])
