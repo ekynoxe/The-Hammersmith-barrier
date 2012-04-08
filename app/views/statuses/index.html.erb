@@ -1,27 +1,13 @@
-<h1>Listing statuses</h1>
-
-<table>
-  <tr>
-    <th>Status</th>
-    <th>Date</th>
-    <th>Time</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @statuses.each do |status| %>
-  <tr>
-    <td><%= status.status %></td>
-    <td><%= status.date %></td>
-    <td><%= status.time %></td>
-    <td><%= link_to 'Show', status %></td>
-    <td><%= link_to 'Edit', edit_status_path(status) %></td>
-    <td><%= button_to 'Destroy', status, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+<% content_for :head do %>
+  <h1>All barrier statuses since <%= @oldest_status.date.strftime("%m/%Y") %> <small><%= link_to('back', root_path) %></small></h1>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Status', new_status_path %>
+<ol class="clearfix">
+  <% @statuses.each do |s| %>
+    <li><em class="status <%= status_class(s) %>"><%= status_class(s).capitalize %></em><span class="date"><%= s.date.strftime("%d/%m/%Y") %></span><span class="time"><%= s.time.strftime("%I:%M%p").downcase! %></span></li>
+  <% end %>
+</ol>
+<h2>Stats since records begun <small>(<%= @oldest_status.date.strftime("%m/%Y") %>)</small></h2>
+<ul class="clearfix">
+  <li class="status no"><em>No</em><span><%= number_to_percentage(@no_percent, :precision => 2, :strip_insignificant_zeros => true) %></span></li>
+  <li class="status yes"><em>Yes</em><span><%= number_to_percentage(@yes_percent, :precision => 2, :strip_insignificant_zeros => true) %></span></li>
+</ul>
