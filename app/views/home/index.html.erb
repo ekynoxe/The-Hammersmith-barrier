@@ -2,6 +2,9 @@
   <h1>Is the Hammersmith bridge barrier operational today?</h1>
 <% end %>
 
+<% if @today_status_north %>
+<h3>updated at <%= @today_status_north.time.strftime("%I:%M%p").downcase! %></h3>
+<% end %>
 <section class="north">
   <h2>North</h2>
   <% if @today_status_north %>
