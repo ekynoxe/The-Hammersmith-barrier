@@ -8,23 +8,25 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    def getStatuses (limit = nil)
-		if limit
-    		@statuses = Status.find(:all, :order => "date desc", :limit => limit).reverse
+    def getStatuses (limit = nil, location = 'north')
+        statuses_report = {}
+        
+        if limit
+            statuses_report["statuses"] = Status.find(:all, :order => "date desc", :limit => limit, :conditions => ["location = ?", location]).reverse
     	else
-    		@statuses = Status.find(:all, :order => "date desc").reverse
+    		statuses_report["statuses"] = Status.find(:all, :order => "date desc", :conditions => ["location = ?", location]).reverse
+        end
+
+    	yes = Status.count(:all,:conditions=>['status=? and location = ?','t', location])
+    	no = Status.count(:all,:conditions=>['status=? and location = ?','f', location])
+    	if 0 != yes+no
+    		statuses_report['yes_percent'] = 100.00 * yes / (yes + no)
+    		statuses_report['no_percent'] = 100.00 * no / (yes + no)
+    	else
+    		statuses_report['yes_percent'] = 0
+    		statuses_report['no_percent'] = 0
     	end
 
-        @oldest_status = Status.first(:order => "date asc")
-    	
-    	yes = Status.count(:all,:conditions=>['status=?','t'])
-    	no = Status.count(:all,:conditions=>['status=?','f'])
-    	if 0 != yes+no
-    		@yes_percent = 100.00 * yes / (yes + no)
-    		@no_percent = 100.00 * no / (yes + no)
-    	else
-    		@yes_percent = 0
-    		@no_percent = 0
-    	end
+        statuses_report
     end
 end

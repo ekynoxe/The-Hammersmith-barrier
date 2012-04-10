@@ -23,6 +23,11 @@
     <%= f.label :time %><br />
     <%= f.time_select :time %>
   </div>
+  <div class="field">
+    <%= f.label :location %><br />
+    <%= f.radio_button :location, "north" %><%= f.label 'location_north', 'north' %>
+    <%= f.radio_button :location, "south" %><%= f.label 'location_south', 'south' %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

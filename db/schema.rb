@@ -11,14 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120406001820) do
+ActiveRecord::Schema.define(:version => 20120410104831) do
 
   create_table "statuses", :force => true do |t|
-    t.boolean  "status",     :default => false, :null => false
+    t.boolean  "status",     :default => false,   :null => false
     t.date     "date"
     t.time     "time"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "location",   :default => "south"
   end
 
 end

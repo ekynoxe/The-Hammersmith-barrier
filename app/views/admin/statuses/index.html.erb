@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>Location</th>
     <th>Status</th>
     <th>Date</th>
     <th>Time</th>
@@ -12,6 +13,7 @@
 
 <% @statuses.each do |status| %>
   <tr>
+    <td><%= status.location %></td>
     <td><%= status.status %></td>
     <td><%= status.date %></td>
     <td><%= status.time %></td>

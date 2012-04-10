@@ -1,13 +1,34 @@
 <% content_for :head do %>
   <h1>All barrier statuses since <%= @oldest_status.date.strftime("%m/%Y") %> <small><%= link_to('back', root_path) %></small></h1>
 <% end %>
-<ol class="clearfix">
-  <% @statuses.each do |s| %>
-    <li><em class="status <%= status_class(s) %>"><%= status_class(s).capitalize %></em><span class="date"><%= s.date.strftime("%d/%m/%Y") %></span><span class="time"><%= s.time.strftime("%I:%M%p").downcase! %></span></li>
-  <% end %>
-</ol>
+<article>
+    <h3>North</h3>
+    <ol class="clearfix">
+    <% @statuses_north['statuses'].each do |s| %>
+        <li><em class="status <%= status_class(s) %>"><%= status_class(s).capitalize %></em><span class="date"><%= s.date.strftime("%d/%m/%Y") %></span><span class="time"><%= s.time.strftime("%I:%M%p").downcase! %></span></li>
+    <% end %>
+    </ol>
+</article>
+<article>
+    <h3>South</h3>
+    <ol class="clearfix">
+    <% @statuses_south['statuses'].each do |s| %>
+        <li><em class="status <%= status_class(s) %>"><%= status_class(s).capitalize %></em><span class="date"><%= s.date.strftime("%d/%m/%Y") %></span><span class="time"><%= s.time.strftime("%I:%M%p").downcase! %></span></li>
+    <% end %>
+    </ol>
+</article>
 <h2>Stats since records begun <small>(<%= @oldest_status.date.strftime("%m/%Y") %>)</small></h2>
-<ul class="clearfix">
-  <li class="status no"><em>No</em><span><%= number_to_percentage(@no_percent, :precision => 2, :strip_insignificant_zeros => true) %></span></li>
-  <li class="status yes"><em>Yes</em><span><%= number_to_percentage(@yes_percent, :precision => 2, :strip_insignificant_zeros => true) %></span></li>
-</ul>
+<article>
+  <h3>North</h3>
+  <ul class="clearfix">
+    <li class="status no"><em>No</em><span><%= number_to_percentage(@statuses_north['no_percent'], :precision => 2, :strip_insignificant_zeros => true) %></span></li>
+    <li class="status yes"><em>Yes</em><span><%= number_to_percentage(@statuses_north['yes_percent'], :precision => 2, :strip_insignificant_zeros => true) %></span></li>
+  </ul>
+</article>
+<article>
+  <h3>South</h3>
+  <ul class="clearfix">
+    <li class="status no"><em>No</em><span><%= number_to_percentage(@statuses_south['no_percent'], :precision => 2, :strip_insignificant_zeros => true) %></span></li>
+    <li class="status yes"><em>Yes</em><span><%= number_to_percentage(@statuses_south['yes_percent'], :precision => 2, :strip_insignificant_zeros => true) %></span></li>
+  </ul>
+</article>
