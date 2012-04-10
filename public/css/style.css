@@ -115,12 +115,23 @@ section {
 header {
   padding-top: 2em;
 }
-
+header div h1 {
+  background-image: url('img/sprite.png');
+  background-repeat: no-repeat;
+  background-position: 0 -600px;
+  padding-left: 60px;
+}
 footer {
   color: #bbb;
-  padding: 2em 0;
+  padding: 0 0 2em;
   text-align: right;
   text-shadow: 0 1px 0 #555;
+}
+footer div {
+  background-image: url('img/sprite.png');
+  background-repeat: no-repeat;
+  background-position: 0 -600px;
+  padding-top: 40px;
 }
   footer small {
     display: block;
