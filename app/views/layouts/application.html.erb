@@ -24,11 +24,9 @@
     <%= yield :head %>
   </div>
 </header>
-<section class="clearfix">
-  <div role="main">
-    <%= yield %>
-  </div>
-</section>
+<div id="content" role="main">
+  <%= yield %>
+</div>
 <footer>
   <div>
   <%= render 'shared/footer' %>

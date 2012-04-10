@@ -89,17 +89,22 @@ footer div {
   margin: 0 auto;
   width: 70%;
 }
-h1, h2 {
+h1, h2, h3 {
    font-family: 'BebasNeueRegular', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
+  clear: both;
+  display: block;
   margin: 0;
   text-align: center;
 }
+h2 {
+  background-color: #ddd;
+  padding: 8px 0;
+}
 small { font-size: 75%; }
 
-header,
-section {
-  background-color: #ededed;
+header{
+  background-color: #fff;
 }
 
 header,
@@ -138,52 +143,54 @@ footer {
   height: 85px;
   width: 220px;
 }
-header div em.no { background-position: 0 17px; }
-header div em.yes { background-position: 0 -141px; }
-header div em.maybe { background-position: 0 -285px; }
+em.no { background-position: 0 17px; }
+em.yes { background-position: 0 -141px; }
+em.maybe { background-position: 0 -285px; }
 
-section div ol {
+#content {
+  background-color: #ededed;
+}
+section ol {
   list-style-type: none;
   padding: 20px 0;
   text-align: center;
 }
-  section div ol li {
+  section ol li {
     font-size: 80%;
     display: inline-block;
     margin: 0 10px;
     width: 70px;
   }
-  section div ol li span {
+  section ol li span {
     display: block;
   }
-  section div ol li .status {
+  section ol li .status {
     height: 25px;
   }
-  section div ol li .no,
-  section div ul li.no {
+  section ol li .no,
+  section ul li.no {
     background-position: 2px -450px;
   }
-  section div ol li .yes,
-  section div ul li.yes {
+  section ol li .yes,
+  section ul li.yes {
     background-position: 2px -542px;
   }
 
-
-section div ul {
+section ul {
   list-style-type: none;
   margin: 0 auto;
   padding: 20px 0 0;
   width: 135px;
 }
-  section div ul .status {
+  section ul .status {
     min-height: 25px;
     padding: 5px 0;
   }
-  section div ul .status em {
+  section ul .status em {
     display: none;
   }
-  section div ul .status,
-  section div ul .status em span {
+  section ul .status,
+  section ul .status em span {
     text-indent: 0;
     text-align: right;
   }
@@ -200,6 +207,10 @@ section div ul {
 @media only screen and (min-width: 35em) {
 	/* Style adjustments for viewports that meet the condition */
   article {
+    padding: 0;
+    width: 100%;
+  }
+  #content section {
     float: left;
     padding: 0;
     width: 50%;
@@ -216,9 +227,12 @@ section div ul {
 .visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
 .visuallyhidden.focusable:active, .visuallyhidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
 .invisible { visibility: hidden; }
-.clearfix:before, .clearfix:after { content: ""; display: table; }
-.clearfix:after { clear: both; }
-.clearfix { *zoom: 1; }
+.clearfix:before, .clearfix:after,
+#content:before, #content:after { content: ""; display: table; }
+.clearfix:after,
+#content:after { clear: both; }
+.clearfix,
+#content { *zoom: 1; }
 
 /* =============================================================================
    Print Styles

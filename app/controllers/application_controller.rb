@@ -12,9 +12,9 @@ class ApplicationController < ActionController::Base
         statuses_report = {}
         
         if limit
-            statuses_report["statuses"] = Status.find(:all, :order => "date desc", :limit => limit, :conditions => ["location = ?", location]).reverse
+            statuses_report["statuses"] = Status.find(:all, :order => "date desc", :limit => limit, :conditions => ["location = ?", location])
     	else
-    		statuses_report["statuses"] = Status.find(:all, :order => "date desc", :conditions => ["location = ?", location]).reverse
+    		statuses_report["statuses"] = Status.find(:all, :order => "date desc", :conditions => ["location = ?", location])
         end
 
     	yes = Status.count(:all,:conditions=>['status=? and location = ?','t', location])
