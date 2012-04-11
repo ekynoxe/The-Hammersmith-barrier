@@ -83,11 +83,9 @@ body {
   padding: 0;
 }
 
-header div,
-section div,
-footer div {
+.content {
   margin: 0 auto;
-  width: 70%;
+  width: 95%;
 }
 h1, h2, h3 {
    font-family: 'BebasNeueRegular', Helvetica, Arial, sans-serif;
@@ -123,24 +121,36 @@ header div h1 {
 }
 footer {
   color: #bbb;
-  padding: 0 0 2em;
-  text-align: right;
+  font-size: 0.8em;
+  line-height: 1.2em;
+  padding: 2em 0;
   text-shadow: 0 1px 0 #555;
 }
-footer div {
-  background-image: url('img/sprite.png');
-  background-repeat: no-repeat;
-  background-position: 0 -600px;
-  padding-top: 40px;
-}
-  footer small {
-    display: block;
-    float: left;
-    text-align: left;
-  }
-  footer a { color: #ddd; }
+  footer a { color: #ddd; text-decoration: underline;}
   footer a:visited { color: #ccc; }
   footer a:hover { color: #fff; }
+
+  footer h1 {
+    font-size: 1.8em;
+    font-weight: normal;
+    margin: 1em 0 0.3em;
+    text-align: left;
+  }
+
+  footer p {
+    margin: 4px 0;
+  }
+
+  footer .copyright {
+    background-image: url('img/sprite.png');
+    background-repeat: no-repeat;
+    background-position: 0 -615px;
+    display: block;
+    float: left;
+    padding-left: 145px;
+  }
+  
+  footer .social { float: right; }
 
 .status {
   background-image: url('img/sprite.png');
@@ -239,11 +249,14 @@ section ul {
 .visuallyhidden.focusable:active, .visuallyhidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
 .invisible { visibility: hidden; }
 .clearfix:before, .clearfix:after,
-#content:before, #content:after { content: ""; display: table; }
+#content:before, #content:after,
+footer .top:before, footer .top:after { content: ""; display: table; }
 .clearfix:after,
-#content:after { clear: both; }
+#content:after,
+footer .top:after { clear: both; }
 .clearfix,
-#content { *zoom: 1; }
+#content,
+footer .top { *zoom: 1; }
 
 /* =============================================================================
    Print Styles
