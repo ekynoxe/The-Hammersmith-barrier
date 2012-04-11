@@ -46,6 +46,8 @@ class Admin::StatusesController < ApplicationController
 
     respond_to do |format|
       if @status.save
+        postTwitterStatus(@status)
+
         format.html { redirect_to admin_status_url(@status), notice: 'Status was successfully created.' }
         format.json { render json: @status, status: :created, location: @status }
       else
@@ -81,5 +83,22 @@ class Admin::StatusesController < ApplicationController
       format.html { redirect_to admin_statuses_url }
       format.json { head :ok }
     end
+  end
+
+  def postTwitterStatus status
+    require "twitter"
+
+    Twitter.configure do |config|
+      config.consumer_key = ENV['TWITTER_CONSUMER_KEY']
+      config.consumer_secret = ENV['TWITTER_CONSUMER_SECRET']
+      config.oauth_token = ENV['TWITTER_OAUTH_TOKEN']
+      config.oauth_token_secret = ENV['TWITTER_OAUTH_TOKEN_SECRET']
+    end
+ 
+    # Initialize your Twitter client
+    client = Twitter::Client.new
+
+    # Post a status update
+    client.update("Today, " + status.date.strftime("%d/%m/%Y") + " at " + status.time.strftime("%I:%M%p").downcase! + ", the " + status.location + " barrier was " + (status.status? ? "functional" : "broken"))
   end
 end
