@@ -75,7 +75,6 @@ td { vertical-align: top; }
    ========================================================================== */
 
 
-
 html,
 body {
   background-color: #666;
@@ -140,8 +139,8 @@ footer {
 
   footer h1 {
     background: none repeat scroll 0 0 #555555;
-    color: #DDDDDD;
     display: inline-block;
+    color: #ddd;
     font-size: 1.8em;
     font-weight: normal;
     margin: 1em 0 0.3em;
