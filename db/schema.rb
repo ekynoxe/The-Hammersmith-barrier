@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120410104831) do
+ActiveRecord::Schema.define(:version => 20120412080755) do
 
   create_table "statuses", :force => true do |t|
     t.boolean  "status",     :default => false,   :null => false
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20120410104831) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "location",   :default => "south"
+    t.text     "comments"
   end
 
 end
