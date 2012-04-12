@@ -9,6 +9,7 @@
     <th></th>
     <th></th>
     <th></th>
+    <th>Comments</th>
   </tr>
 
 <% @statuses.each do |status| %>
@@ -20,6 +21,7 @@
     <td><%= link_to 'Show', admin_status_path(status) %></td>
     <td><%= link_to 'Edit', edit_admin_status_path(status) %></td>
     <td><%= button_to 'Destroy', admin_status_path(status), confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= status.comments %></td>
   </tr>
 <% end %>
 </table>

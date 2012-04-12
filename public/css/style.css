@@ -88,11 +88,13 @@ body {
   width: 95%;
 }
 h1, h2, h3 {
-   font-family: 'BebasNeueRegular', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
   clear: both;
   display: block;
   margin: 0;
+
+  font-family: 'BebasNeueRegular', Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
   text-align: center;
 }
 h2 {
@@ -113,11 +115,17 @@ section {
 header {
   padding-top: 2em;
 }
-header div h1 {
+header div h1 a,
+header div h1 a:visited {
   background-image: url('img/sprite.png');
   background-repeat: no-repeat;
   background-position: 0 -600px;
-  padding-left: 60px;
+  padding-left: 150px;
+  color: #222;
+}
+header div h1 a:hover,
+header div h1 a:active {
+  color: #f00;
 }
 footer {
   color: #bbb;
@@ -131,9 +139,13 @@ footer {
   footer a:hover { color: #fff; }
 
   footer h1 {
+    background: none repeat scroll 0 0 #555555;
+    color: #DDDDDD;
+    display: inline-block;
     font-size: 1.8em;
     font-weight: normal;
     margin: 1em 0 0.3em;
+    padding: 6px 5px 4px;
     text-align: left;
   }
 
