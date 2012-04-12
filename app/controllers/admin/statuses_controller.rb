@@ -99,6 +99,6 @@ class Admin::StatusesController < ApplicationController
     client = Twitter::Client.new
 
     # Post a status update
-    client.update(status.date.strftime("%d/%m/%Y") + " at " + status.time.strftime("%I:%M%p").downcase! + ", the " + status.location + " barrier was " + (status.status? ? "in place" : "broken") + "http://ekx.im/hb")
+    client.update(status.date.strftime("%d/%m/%Y") + " at " + status.time.strftime("%I:%M%p").downcase! + ", the " + status.location + " barrier was " + (status.status? ? "in place" : "broken") + " http://ekx.im/hb")
   end
 end
