@@ -3,3 +3,6 @@
 This is the code for my small site tracking the status of the Hammersmith bridge bus lanes barriers.
 The barriers are most of the time broken, and they would benefit from being replaced by bollards.
 This would both prevent unnecessary waste of money over the replacement of the broken barriers, and help adjust the cycle lane design leading to the south access to the bridge.
+
+== Todo ==
+- maybe use graphs? http://mbostock.github.com/d3/
