@@ -1,5 +1,6 @@
 Hambarrier::Application.routes.draw do
 
+  match 'graph1' => 'statuses#graph1'
   resources :statuses
   
   namespace :admin do
