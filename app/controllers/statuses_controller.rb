@@ -9,7 +9,7 @@ class StatusesController < ApplicationController
         @oldest_status = Status.first(:order => "date asc")
 	end
 
-	def graph1
+	def graph_partition
 		@nb_statuses_north_no  = Status.count(:all,:conditions=>['status=? and location = ?','t', "north"])
     	@nb_statuses_north_yes = Status.count(:all,:conditions=>['status=? and location = ?','f', "north"])
     	@nb_statuses_south_no  = Status.count(:all,:conditions=>['status=? and location = ?','t', "south"])
@@ -17,4 +17,13 @@ class StatusesController < ApplicationController
 
         @oldest_status = Status.first(:order => "date asc")
 	end
+
+    def graph_calendar
+        @nb_statuses_north_no  = Status.count(:all,:conditions=>['status=? and location = ?','t', "north"])
+        @nb_statuses_north_yes = Status.count(:all,:conditions=>['status=? and location = ?','f', "north"])
+        @nb_statuses_south_no  = Status.count(:all,:conditions=>['status=? and location = ?','t', "south"])
+        @nb_statuses_south_yes = Status.count(:all,:conditions=>['status=? and location = ?','f', "south"])
+
+        @oldest_status = Status.first(:order => "date asc")
+    end
 end

@@ -1,6 +1,7 @@
 Hambarrier::Application.routes.draw do
 
-  match 'graph1' => 'statuses#graph1'
+  match 'graph_partition' => 'statuses#graph_partition'
+  match 'graph_calendar' => 'statuses#graph_calendar'
   resources :statuses
   
   namespace :admin do
