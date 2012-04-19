@@ -4,7 +4,7 @@
 
 <section class="north">
   <h2>North</h2>
-  <div id="chart_north"></div>
+  <div id="chart"></div>
 </section>
 
 <section class="south">
@@ -14,118 +14,77 @@
 
 <script>
 
-var data_north = {
- "name": "status north",
- "children": [
-  {
-   "name": "yes",
-   "children": [
-  <% (@nb_statuses_north_no - 1).times do %>
-    {"size": 1},
-  <% end %>
-    {"size": 1}
-   ]
-  },
-  {
-   "name": "no",
-   "children": [
-  <% (@nb_statuses_north_yes - 1).times do %>
-    {"size": 1},
-  <% end %>
-    {"size": 1}
-   ]
-  }
- ]
-};
+var oldest_year = <%= @oldest_status.date.strftime("%Y") %>,
+    newest_year = <%= @newest_status.date.strftime("%Y") %>,
 
-var data_south = {
- "name": "status south",
- "children": [
-  {
-   "name": "yes",
-   "children": [
-  <% (@nb_statuses_south_no - 1).times do %>
-    {"size": 1},
-  <% end %>
-    {"size": 1}
-   ]
-  },
-  {
-   "name": "no",
-   "children": [
-  <% (@nb_statuses_south_yes - 1).times do %>
-    {"size": 1},
-  <% end %>
-    {"size": 1}
-   ]
-  }
- ]
-};
+/*global d3: true*/
+    margin = {top: 19, right: 20, bottom: 20, left: 19},
+    width = 960 - margin.right - margin.left, // width
+    height = 136 - margin.top - margin.bottom, // height
+    cellSize = 17, // cell size
 
-function render() {
-  $("#chart_north, #chart_south").empty();
-  
-  var w = $('section.north').width(),
-      h = w,
-      r = Math.min(w, h) / 2,
-      color = d3.scale.category20c(),
+    day = d3.time.format("%w"),
+    week = d3.time.format("%U"),
+    percent = d3.format(".1%"),
+    format = d3.time.format("%Y-%m-%d"),
 
-      vis_north = d3.select("#chart_north").append("svg")
-        .attr("width", w)
-        .attr("height", h)
-        .append("g")
-        .attr("transform", "translate(" + w / 2 + "," + h / 2 + ")"),
+    color = d3.scale.quantize()
+    .domain([-0.05, 0.05])
+    .range(d3.range(9)),
 
-      vis_south = d3.select("#chart_south").append("svg")
-        .attr("width", w)
-        .attr("height", h)
-        .append("g")
-        .attr("transform", "translate(" + w / 2 + "," + h / 2 + ")"),
+    svg = d3.select("#chart").selectAll("svg")
+    .data(d3.range(oldest_year, newest_year))
+  .enter().append("svg")
+    .attr("width", width + margin.right + margin.left)
+    .attr("height", height + margin.top + margin.bottom)
+    .attr("class", "RdYlGn")
+  .append("g")
+    .attr("transform", "translate(" + (margin.left + (width - cellSize * 53) / 2) + "," + (margin.top + (height - cellSize * 7) / 2) + ")");
 
-      partition = d3.layout.partition()
-        .sort(null)
-        .size([2 * Math.PI, r * r])
-        .value(function(d) { return 1; }),
+svg.append("text")
+    .attr("transform", "translate(-6," + cellSize * 3.5 + ")rotate(-90)")
+    .attr("text-anchor", "middle")
+    .text(String);
 
-      arc = d3.svg.arc()
-        .startAngle(function(d) { return d.x; })
-        .endAngle(function(d) { return d.x + d.dx; })
-        .innerRadius(function(d) { return Math.sqrt(d.y); })
-        .outerRadius(function(d) { return Math.sqrt(d.y + d.dy); }),
+var rect = svg.selectAll("rect.day")
+    .data(function (d) { return d3.time.days(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
+  .enter().append("rect")
+    .attr("class", "day")
+    .attr("width", cellSize)
+    .attr("height", cellSize)
+    .attr("x", function (d) { return week(d) * cellSize; })
+    .attr("y", function (d) { return day(d) * cellSize; })
+    .datum(format);
 
-      path_north = vis_north.data([data_north]).selectAll("path")
-        .data(partition.nodes)
-        .enter().append("path")
-        .attr("display", function(d) { return d.depth ? null : "none"; }) // hide inner ring
-        .attr("d", arc)
-        .attr("fill-rule", "evenodd")
-        .style("stroke", "#fff")
-        .style("fill", function(d) {
-          var col = (d.children ? d : d.parent).name;
-          return col == "yes" ? '#71bf44' : '#ed1c24';
-        })
-        .each(stash);
+rect.append("title")
+    .text(function (d) { return d; });
 
-      path_south = vis_south.data([data_south]).selectAll("path")
-        .data(partition.nodes)
-        .enter().append("path")
-        .attr("display", function(d) { return d.depth ? null : "none"; }) // hide inner ring
-        .attr("d", arc)
-        .attr("fill-rule", "evenodd")
-        .style("stroke", "#fff")
-        .style("fill", function(d) {
-          var col = (d.children ? d : d.parent).name;
-          return col == "yes" ? '#71bf44' : '#ed1c24';
-        })
-        .each(stash);
-  }
+svg.selectAll("path.month")
+    .data(function (d) { return d3.time.months(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
+  .enter().append("path")
+    .attr("class", "month")
+    .attr("d", monthPath);
 
-// Stash the old values for transition.
-function stash(d) {
-  d.x0 = d.x;
-  d.dx0 = d.dx;
+function monthPath(t0) {
+    var t1 = new Date(t0.getFullYear(), t0.getMonth() + 1, 0),
+        d0 = +day(t0), w0 = +week(t0),
+        d1 = +day(t1), w1 = +week(t1);
+    return "M" + (w0 + 1) * cellSize + "," + d0 * cellSize +
+      "H" + w0 * cellSize + "V" + 7 * cellSize +
+      "H" + w1 * cellSize + "V" + (d1 + 1) * cellSize +
+      "H" + (w1 + 1) * cellSize + "V" + 0 +
+      "H" + (w0 + 1) * cellSize + "Z";
 }
 
-$(window).resize(render);
-$(render);
+var data = {
+<% @statuses_north[0...-2].each do |s| %>
+  '<%= s.date.strftime("%Y-%m-%d") %>': <%= (s.status ? 1 : -1 ) %>,
+<% end %>
+  '<%= @statuses_north[-1].date.strftime("%Y-%m-%d") %>': <%= (@statuses_north[-1].status ? 1 : -1 ) %>
+};
+
+rect.filter(function (d) { return d in data; })
+    .attr("class", function (d) { return "day q" + color(data[d]) + "-9"; })
+    .select("title")
+    .text(function (d) { return d + ": " + percent(data[d]); });
 </script>

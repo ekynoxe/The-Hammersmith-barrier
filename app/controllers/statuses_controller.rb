@@ -8,7 +8,7 @@ class StatusesController < ApplicationController
         
         @oldest_status = Status.first(:order => "date asc")
 	end
-    
+
     def show
         if( params[:year].blank? ||
             params[:month].blank? ||
@@ -36,11 +36,10 @@ class StatusesController < ApplicationController
 	end
 
     def graph_calendar
-        @nb_statuses_north_no  = Status.count(:all,:conditions=>['status=? and location = ?','t', "north"])
-        @nb_statuses_north_yes = Status.count(:all,:conditions=>['status=? and location = ?','f', "north"])
-        @nb_statuses_south_no  = Status.count(:all,:conditions=>['status=? and location = ?','t', "south"])
-        @nb_statuses_south_yes = Status.count(:all,:conditions=>['status=? and location = ?','f', "south"])
+        @statuses_north  = Status.find(:all,:conditions=>['location = ?',"north"])
+        @statuses_south  = Status.find(:all,:conditions=>['location = ?',"south"])
 
         @oldest_status = Status.first(:order => "date asc")
+        @newest_status = Status.first(:order => "date desc")
     end
 end
