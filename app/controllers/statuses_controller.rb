@@ -8,4 +8,21 @@ class StatusesController < ApplicationController
         
         @oldest_status = Status.first(:order => "date asc")
 	end
+
+    def show
+        if( params[:year].blank? ||
+            params[:month].blank? ||
+            params[:day].blank? ||
+            params[:year].to_i == 0 ||
+            params[:month].to_i == 0 ||
+            params[:day].to_i == 0)
+
+            redirect_to root_url
+        else
+            @date = Time.local(params[:year], params[:month], params[:day])
+
+            @statuses_north = Status.find(:all, :conditions => ["DATE(date) = DATE(?) and location = ?", @date, "north"])
+            @statuses_south = Status.find(:all, :conditions => ["DATE(date) = DATE(?) and location = ?", @date, "south"])
+        end
+    end
 end

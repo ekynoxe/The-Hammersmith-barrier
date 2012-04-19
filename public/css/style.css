@@ -182,6 +182,25 @@ em.maybe { background-position: 0 -285px; }
 #content {
   background-color: #ededed;
 }
+
+.onday .main_status {
+  margin: 40px auto 10px;
+}
+
+.onday span.time {
+  font-weight: bold;
+}
+span.comments,
+.onday span {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+  padding: 10px 0;
+}
+span.comments {
+  background-color: #f8f8f8;
+}
 section ol {
   list-style-type: none;
   padding: 20px 0;

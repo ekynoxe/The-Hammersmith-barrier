@@ -1,6 +1,8 @@
 Hambarrier::Application.routes.draw do
 
   resources :statuses
+  match ':statuses(/:year/:month/:day)' => 'statuses#show'
+  
   
   namespace :admin do
     resources :statuses

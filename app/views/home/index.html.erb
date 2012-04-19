@@ -5,6 +5,9 @@
   <h2>North</h2>
   <% if @today_status_north %>
     <em class="status main_status <%= status_class(@today_status_north) %>"><%= status_class(@today_status_north).capitalize %></em>
+    <% if !@today_status_north.comments.blank? %>
+      <span class="comments"><%= @today_status_north.comments %></span>
+    <% end %>
   <% else %>
     <em class="status main_status maybe">Maybe</em>
   <% end %>
@@ -14,6 +17,9 @@
   <h2>South</h2>
   <% if @today_status_south %>
     <em class="status main_status <%= status_class(@today_status_south) %>"><%= status_class(@today_status_south).capitalize %></em>
+    <% if !@today_status_south.comments.blank? %>
+      <span class="comments"><%= @today_status_south.comments %></span>
+    <% end %>
   <% else %>
     <em class="status main_status maybe">Maybe</em>
   <% end %>
