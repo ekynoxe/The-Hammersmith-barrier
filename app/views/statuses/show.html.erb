@@ -1,0 +1,31 @@
+<h2>Barrier statuses for <%= @date.strftime("%d/%m/%Y") %></h2>
+
+<section class="north onday">
+  <h2>North</h2>
+  <% if @statuses_north.length != 0 %>
+    <% @statuses_north.each do |s| %>
+      <em class="status main_status <%= status_class(s) %>"><%= status_class(s).capitalize %></em>
+      <span class="time"><%= s.time.strftime("%I:%M%p").downcase! %></span>
+      <% if !s.comments.blank? %>
+        <span class="comments"><%= s.comments %></span>
+      <% end %>
+    <% end %>
+  <% else %>
+    <em class="status main_status maybe">Maybe</em>
+  <% end %>
+</section>
+
+<section class="south onday">
+  <h2>South</h2>
+  <% if @statuses_south.length != 0 %>
+    <% @statuses_south.each do |s| %>
+      <em class="status main_status <%= status_class(s) %>"><%= status_class(s).capitalize %></em>
+      <span class="time"><%= s.time.strftime("%I:%M%p").downcase! %></span>
+      <% if !s.comments.blank? %>
+        <span class="comments"><%= s.comments %></span>
+      <% end %>
+    <% end %>
+  <% else %>
+    <em class="status main_status maybe">Maybe</em>
+  <% end %>
+</section>
