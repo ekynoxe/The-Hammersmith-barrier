@@ -25,6 +25,7 @@ class StatusesController < ApplicationController
         @nb_statuses_south_yes = Status.count(:all,:conditions=>['status=? and location = ?','f', "south"])
 
         @oldest_status = Status.first(:order => "date asc")
+    end
 
     def show
         if( params[:year].blank? ||

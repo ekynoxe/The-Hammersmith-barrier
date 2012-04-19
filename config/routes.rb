@@ -2,6 +2,7 @@ Hambarrier::Application.routes.draw do
 
   match 'graph_partition' => 'statuses#graph_partition'
   match 'graph_calendar' => 'statuses#graph_calendar'
+  
   resources :statuses
   match ':statuses(/:year/:month/:day)' => 'statuses#show'
   
