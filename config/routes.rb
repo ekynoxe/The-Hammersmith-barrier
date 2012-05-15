@@ -1,13 +1,12 @@
 Hambarrier::Application.routes.draw do
 
-  resources :statuses
-  match ':statuses(/:year/:month/:day)' => 'statuses#show'
-  
-  
   namespace :admin do
     resources :statuses
   end
 
+  resources :statuses
+  match ':statuses(/:year/:month/:day)' => 'statuses#show'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
