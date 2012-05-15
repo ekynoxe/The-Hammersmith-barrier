@@ -4,10 +4,11 @@ class Status < ActiveRecord::Base
 
 	has_attached_file :photo,
 		:styles => {
-		:thumb  => "100x100",
-		:medium => "200x200",
-		:large => "600x400"
-	},
+			:thumb		=> "100x100",
+			:medium		=> "200x200",
+			:original	=> "800x800"
+		},
+	:convert_options => { :all => '-quality 75' },
 	:storage => :s3,
 	:s3_credentials => {	:access_key_id     => ENV['S3_KEY'],
 							:secret_access_key => ENV['S3_SECRET'] },
