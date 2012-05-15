@@ -1,4 +1,4 @@
-<%= form_for([:admin, @status]) do |f| %>
+<%= form_for [:admin, @status], :html => { :multipart => true } do |f| %>
   <% if @status.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@status.errors.count, "error") %> prohibited this status from being saved:</h2>
@@ -27,6 +27,10 @@
     <%= f.label :location %><br />
     <%= f.radio_button :location, "north" %><%= f.label 'location_north', 'north' %>
     <%= f.radio_button :location, "south" %><%= f.label 'location_south', 'south' %>
+  </div>
+  <div class="field">
+    <%= f.label :photo %><br />
+    <%= f.file_field :photo %>
   </div>
   <div class="field">
     <%= f.label :comments %><br />

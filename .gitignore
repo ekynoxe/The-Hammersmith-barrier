@@ -1,4 +1,5 @@
 .DS_*
 log/*
 tmp/*
-config/initializers/user_auth.rb
+.env
+Procfile
