@@ -22,7 +22,10 @@
 
 <p>
   <b>Photo:</b>
-  <%= @status.photo %>
+  <%= image_tag @status.photo.url %>
+  <%= image_tag @status.photo.url(:medium) %>
+  <%= image_tag @status.photo(:thumb) %>
+  <%= image_tag @status.photo(:large) %>
 </p>
 
 <%= link_to 'Edit', edit_admin_status_path(@status) %> |
