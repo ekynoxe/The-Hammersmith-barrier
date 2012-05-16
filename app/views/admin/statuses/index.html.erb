@@ -1,43 +1,15 @@
 <h1>Listing statuses</h1>
-
+<section class="wide admin">
 <%= link_to 'New Status', new_admin_status_path %>
-
-
-<table>
-  <tr>
-    <th>Location</th>
-    <th>Status</th>
-    <th>Date</th>
-    <th>Time</th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th>Comments</th>
-  </tr>
-
-<% @statuses.each do |status| %>
-  <tr>
-    <td><%= status.location %></td>
-    <td><%= status.status %></td>
-    <td><%= status.date %></td>
-    <td><%= status.time %></td>
-    <td><%= link_to 'Show', admin_status_path(status) %></td>
-    <td><%= link_to 'Edit', edit_admin_status_path(status) %></td>
-    <td><%= button_to 'Destroy', admin_status_path(status), confirm: 'Are you sure?', method: :delete %></td>
-    <td><%= status.comments %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
 <ul>
 <% @statuses.each do |s| %>
-    <li>
-        <div><%= s.location %> | <%= s.status %> | <%= s.date.strftime("%d/%m/%Y") %> - <%= s.time.strftime("%I:%M%p").downcase! %></div>
-        <div><%= link_to 'Show', admin_status_path(s) %> | <%= link_to 'Edit', edit_admin_status_path(s) %> | <%= button_to 'Destroy', admin_status_path(s), confirm: 'Are you sure?', method: :delete %></div>
+    <li class="<%= status_class(s) %>">
+        <%= location_to_char(s.location) %>
+        <span><%= s.date.strftime("%d/%m/%Y") %> - <%= s.time.strftime("%I:%M%p").downcase! %></span>
         <div><%= s.comments %></div>
+        <span><%= link_to 'Show', admin_status_path(s) %> | <%= link_to 'Edit', edit_admin_status_path(s) %> | <%= button_to 'Destroy', admin_status_path(s), confirm: 'Are you sure?', method: :delete %></span>
         <% if s.photo.file? %><%= image_tag s.photo(:thumb) %><% end %>
     </li>
 <% end %>
 </ul>
+</section>
