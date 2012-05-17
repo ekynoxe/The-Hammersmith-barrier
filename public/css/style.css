@@ -278,6 +278,23 @@ section.wide ul li input { display: inline-block; }
   section.admin ul li.south.yes { background-position: -598px -121px; }
   section.admin ul li.south.no  { background-position: -598px -25px; }
 
+  section.admin ul li form {
+    display: inline-block;
+  }
+  section.admin ul li input[type="submit"] {
+    cursor: pointer;
+    border: 1px solid;
+    font-weight: bold;
+    font-size: 0.7em;
+    padding: 1px 4px 0;
+    color: #fff;
+    overflow: visible;
+    background: #f00;
+    zoom: 1;
+    border-color: #f33 #f33 #d00;
+    vertical-align: text-top;
+  }
+
 /* =============================================================================
    Media Queries
    ========================================================================== */
@@ -312,13 +329,16 @@ section.wide ul li input { display: inline-block; }
 .invisible { visibility: hidden; }
 .clearfix:before, .clearfix:after,
 #content:before, #content:after,
-footer .top:before, footer .top:after { content: ""; display: table; }
+footer .top:before, footer .top:after,
+section.admin ul li:before, section.admin ul li:after { content: ""; display: table; }
 .clearfix:after,
 #content:after,
-footer .top:after { clear: both; }
+footer .top:after,
+section.admin ul li:after { clear: both; }
 .clearfix,
 #content,
-footer .top { *zoom: 1; }
+footer .top,
+section.admin ul li { *zoom: 1; }
 
 /* =============================================================================
    Print Styles
