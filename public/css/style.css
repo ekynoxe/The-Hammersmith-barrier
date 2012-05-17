@@ -266,6 +266,18 @@ section.wide ul li input { display: inline-block; }
   section.admin ul li{
     font-size: 0.8em;
   }
+  section.admin ul li img {
+    float: right;
+  }
+  section.admin ul li.status {
+    padding-left: 30px;
+    text-align: left;
+  }
+  section.admin ul li.north.yes { background-position: -598px -313px; }
+  section.admin ul li.north.no  { background-position: -598px -215px; }
+  section.admin ul li.south.yes { background-position: -598px -121px; }
+  section.admin ul li.south.no  { background-position: -598px -25px; }
+
 /* =============================================================================
    Media Queries
    ========================================================================== */

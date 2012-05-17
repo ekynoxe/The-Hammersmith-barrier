@@ -3,12 +3,11 @@
 <%= link_to 'New Status', new_admin_status_path %>
 <ul>
 <% @statuses.each do |s| %>
-    <li class="<%= status_class(s) %>">
-        <%= location_to_char(s.location) %>
+    <li class="status <%= status_class(s) + ' ' + s.location %>">
+        <% if s.photo.file? %><%= image_tag s.photo(:thumb) %><% end %>
         <span><%= s.date.strftime("%d/%m/%Y") %> - <%= s.time.strftime("%I:%M%p").downcase! %></span>
         <div><%= s.comments %></div>
         <span><%= link_to 'Show', admin_status_path(s) %> | <%= link_to 'Edit', edit_admin_status_path(s) %> | <%= button_to 'Destroy', admin_status_path(s), confirm: 'Are you sure?', method: :delete %></span>
-        <% if s.photo.file? %><%= image_tag s.photo(:thumb) %><% end %>
     </li>
 <% end %>
 </ul>
