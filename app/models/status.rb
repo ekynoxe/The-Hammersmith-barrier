@@ -1,4 +1,7 @@
 class Status < ActiveRecord::Base
+	attr_accessor :delete_photo
+	before_validation :clear_photo
+
     validates :location, :inclusion => { :in => %w(north south),
     :message => "%{value} is not a valid location" }
 
@@ -15,4 +18,10 @@ class Status < ActiveRecord::Base
 	:path => ":attachment/:id/:style.:extension",
 	:bucket => ENV['S3_BUCKET'],
 	:s3_host_name => ENV['S3_HOST']
+
+	private
+	def clear_photo
+		self.photo = nil if self.delete_photo && !self.photo.dirty?
+		true
+	end
 end
