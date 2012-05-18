@@ -189,6 +189,10 @@ em.maybe { background-position: 0 -285px; }
 .onday .main_status {
   margin: 40px auto 10px;
 }
+.onday img {
+  display: block;
+  margin: 10px auto;
+}
 
 .onday span.time {
   font-weight: bold;
