@@ -1,5 +1,5 @@
 class Status < ActiveRecord::Base
-	attr_accessor :delete_photo
+	attr_accessor :delete_photo, :tweet_it
 	before_validation :clear_photo
 
     validates :location, :inclusion => { :in => %w(north south),

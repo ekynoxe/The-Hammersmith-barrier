@@ -46,7 +46,9 @@ class Admin::StatusesController < ApplicationController
 
     respond_to do |format|
       if @status.save
-        postTwitterStatus(@status)
+        if(!params[:status][:tweet_it].blank? && "0" != params[:status][:tweet_it])
+          postTwitterStatus(@status)
+        end
 
         format.html { redirect_to admin_status_url(@status), notice: 'Status was successfully created.' }
         format.json { render json: @status, status: :created, location: @status }
