@@ -1,6 +1,6 @@
 <h1>Editing status</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @status %> |
+<section class="wide">
+<%= link_to 'Show', admin_status_path(@status) %> |
 <%= link_to 'Back', admin_statuses_path %>
+<%= render 'form' %>
+</section>

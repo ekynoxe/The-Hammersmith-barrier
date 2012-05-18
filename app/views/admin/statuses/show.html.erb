@@ -20,10 +20,12 @@
   <%= @status.time %>
 </p>
 
+<% if @status.photo.file? %>
 <p>
   <b>Photo:</b>
   <%= image_tag @status.photo(:thumb) %>
 </p>
+<% end %>
 
 <%= link_to 'Edit', edit_admin_status_path(@status) %> |
 <%= link_to 'Back', admin_statuses_path %>

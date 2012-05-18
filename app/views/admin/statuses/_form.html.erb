@@ -12,34 +12,35 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :status %><br />
+    <%= f.label :status %>
     <%= f.check_box :status %>
   </div>
   <div class="field">
-    <%= f.label :date %><br />
-    <%= f.date_select :date %>
+    <%= f.label :date %>
+    <%= f.date_select :date %> at <%= f.time_select :time %>
   </div>
   <div class="field">
-    <%= f.label :time %><br />
-    <%= f.time_select :time %>
-  </div>
-  <div class="field">
-    <%= f.label :location %><br />
+    <%= f.label :location %>
     <%= f.radio_button :location, "north" %><%= f.label 'location_north', 'north' %>
     <%= f.radio_button :location, "south" %><%= f.label 'location_south', 'south' %>
   </div>
+  <% if !@status.new_record? && @status.photo.file? %>
   <div class="field">
-    <%= f.label :delete_photo %><br />
+    <%= f.label :delete_photo %>
     <%= f.check_box :delete_photo %>
+    <%= image_tag @status.photo(:thumb) %>
   </div>
+  <% end %>
   <div class="field">
-    <%= f.label :photo %><br />
+    <%= f.label :photo %>
     <%= f.file_field :photo %>
   </div>
+  <% if @status.new_record? %>
   <div class="field">
-    <%= f.label :tweet_it %><br />
+    <%= f.label :tweet_it %>
     <%= f.check_box :tweet_it, :checked => true %>
   </div>
+  <% end %>
   <div class="field">
     <%= f.label :comments %><br />
     <%= f.text_area :comments %>
