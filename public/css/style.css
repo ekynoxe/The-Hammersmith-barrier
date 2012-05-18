@@ -16,7 +16,9 @@ body { margin: 0; font-size: 1em; line-height: 1.4; }
 
 a { color: #f00; text-decoration: none;}
 a:visited { color: #f22; }
-a:hover { color: #f60; }
+a:hover,
+section ol li a:hover,
+section ol li a:visited:hover { color: #f60; }
 a:focus { outline: thin dotted; }
 a:hover, a:active { outline: 0; }
 
@@ -175,6 +177,7 @@ footer {
   height: 85px;
   width: 220px;
 }
+
 em.no { background-position: 0 17px; }
 em.yes { background-position: 0 -141px; }
 em.maybe { background-position: 0 -285px; }
@@ -209,8 +212,15 @@ section ol {
   section ol li {
     font-size: 80%;
     display: inline-block;
-    margin: 0 10px;
-    width: 70px;
+    margin: 0 5px 10px;
+    width: 80px;
+  }
+  section ol li a,
+  section ol li a:visited {
+    display: block;
+    background-color: #fff;
+    color: #222;
+    padding: 5px;
   }
   section ol li span {
     display: block;

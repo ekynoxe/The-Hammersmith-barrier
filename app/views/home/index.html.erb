@@ -30,7 +30,7 @@
   <h2>North</h2>
   <ol class="clearfix">
     <% @statuses_north['statuses'].each do |s| %>
-      <li><em class="status <%= status_class(s) %>"><%= status_class(s).capitalize %></em><span class="date"><%= s.date.strftime("%d/%m/%Y") %></span><span class="time"><%= s.time.strftime("%I:%M%p").downcase! %></span></li>
+      <li><a href="<%= statuses_url_for_day(s) %>"><em class="status <%= status_class(s) %>"><%= status_class(s).capitalize %></em><span class="date"><%= s.date.strftime("%d/%m/%Y") %></span><span class="time"><%= s.time.strftime("%I:%M%p").downcase! %></span></a></li>
     <% end %>
   </ol>
 </section>
@@ -39,7 +39,7 @@
   <h2>South</h2>
   <ol class="clearfix">
     <% @statuses_south['statuses'].each do |s| %>
-      <li><em class="status <%= status_class(s) %>"><%= status_class(s).capitalize %></em><span class="date"><%= s.date.strftime("%d/%m/%Y") %></span><span class="time"><%= s.time.strftime("%I:%M%p").downcase! %></span></li>
+      <li><a href="<%= statuses_url_for_day(s) %>"><em class="status <%= status_class(s) %>"><%= status_class(s).capitalize %></em><span class="date"><%= s.date.strftime("%d/%m/%Y") %></span><span class="time"><%= s.time.strftime("%I:%M%p").downcase! %></span></a></li>
     <% end %>
   </ol>
 </section>
