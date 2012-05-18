@@ -10,19 +10,9 @@ class StatusesController < ApplicationController
 	end
 
     def show
-        if( params[:year].blank? ||
-            params[:month].blank? ||
-            params[:day].blank? ||
-            params[:year].to_i == 0 ||
-            params[:month].to_i == 0 ||
-            params[:day].to_i == 0)
+        @date = Time.utc(params[:year].to_s, params[:month].to_s, params[:day].to_s)
 
-            redirect_to root_url
-        else
-            @date = Time.local(params[:year], params[:month], params[:day])
-
-            @statuses_north = Status.find(:all, :conditions => ["DATE(date) = DATE(?) and location = ?", @date, "north"])
-            @statuses_south = Status.find(:all, :conditions => ["DATE(date) = DATE(?) and location = ?", @date, "south"])
-        end
+        @statuses_north = Status.find(:all, :conditions => ["DATE(date) = DATE(?) and location = ?", @date, "north"])
+        @statuses_south = Status.find(:all, :conditions => ["DATE(date) = DATE(?) and location = ?", @date, "south"])
     end
 end
