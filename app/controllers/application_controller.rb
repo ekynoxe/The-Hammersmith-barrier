@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
-  
+    protect_from_forgery
+
+    def build_statuses_url_for_day s
+        day_statuses_url(:year => s.date.year, :month => "%02d" % s.date.month, :day => "%02d" % s.date.day)
+    end
+
   protected
     def authenticate
       authenticate_or_request_with_http_basic do |username, password|
