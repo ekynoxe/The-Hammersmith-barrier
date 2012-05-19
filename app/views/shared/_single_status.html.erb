@@ -1,0 +1,8 @@
+<em class="status main_status <%= status_class(s) %>"><%= status_class(s).capitalize %></em>
+<span class="time"><%= s.time.strftime("%I:%M%p").downcase! %></span>
+<% if s.photo.file? %>
+	<%= image_tag s.photo(:medium) %>
+<% end %>
+<% if !s.comments.blank? %>
+	<span class="comments"><%= s.comments %></span>
+<% end %>

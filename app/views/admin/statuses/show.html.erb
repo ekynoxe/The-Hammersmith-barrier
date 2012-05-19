@@ -1,31 +1,6 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Location:</b>
-  <%= @status.location %>
-</p>
-
-<p>
-  <b>Status:</b>
-  <%= @status.status %>
-</p>
-
-<p>
-  <b>Date:</b>
-  <%= @status.date %>
-</p>
-
-<p>
-  <b>Time:</b>
-  <%= @status.time %>
-</p>
-
-<% if @status.photo.file? %>
-<p>
-  <b>Photo:</b>
-  <%= image_tag @status.photo(:thumb) %>
-</p>
-<% end %>
-
-<%= link_to 'Edit', edit_admin_status_path(@status) %> |
-<%= link_to 'Back', admin_statuses_path %>
+<section class="onday">
+  <%= link_to 'Edit', edit_admin_status_path(@status) %> | <%= link_to 'Back', admin_statuses_path %>
+  <h2><%= @status.location.capitalize %></h2>
+  <p id="notice"><%= notice %></p>
+  <%= render :partial => 'shared/single_status', :locals => { :s => @status } %>
+</section>

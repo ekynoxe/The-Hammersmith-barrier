@@ -1,62 +1,33 @@
-<% if @today_status_north %>
-<h3>updated at <%= @today_status_north.time.strftime("%I:%M%p").downcase! %></h3>
+<% if @statuses[:north][:today] %>
+<h3>updated at <%= @statuses[:north][:today].time.strftime("%I:%M%p").downcase! %></h3>
 <% end %>
-<section class="north">
-  <h2>North</h2>
-  <% if @today_status_north %>
-    <em class="status main_status <%= status_class(@today_status_north) %>"><%= status_class(@today_status_north).capitalize %></em>
-    <% if !@today_status_north.comments.blank? %>
-      <span class="comments"><%= @today_status_north.comments %></span>
-    <% end %>
-  <% else %>
-    <em class="status main_status maybe">Maybe</em>
-  <% end %>
-</section>
 
-<section class="south">
-  <h2>South</h2>
-  <% if @today_status_south %>
-    <em class="status main_status <%= status_class(@today_status_south) %>"><%= status_class(@today_status_south).capitalize %></em>
-    <% if !@today_status_south.comments.blank? %>
-      <span class="comments"><%= @today_status_south.comments %></span>
-    <% end %>
+<% %w{north south}.each do |loc| %>
+<section class="north onday">
+  <h2><%= loc.capitalize %></h2>
+  <% if @statuses[loc.to_sym][:today] %>
+    <%= render :partial => 'shared/single_status', :locals => { :s => @statuses[loc.to_sym][:today] } %>
   <% else %>
-    <em class="status main_status maybe">Maybe</em>
+    <%= render :partial => 'shared/maybe' %>
   <% end %>
 </section>
+<% end %>
+
 
 <h1>Previous days</h1>
-<section class="north">
-  <h2>North</h2>
-  <ol class="clearfix">
-    <% @statuses_north['statuses'].each do |s| %>
-      <li><a href="<%= statuses_url_for_day(s) %>"><em class="status <%= status_class(s) %>"><%= status_class(s).capitalize %></em><span class="date"><%= s.date.strftime("%d/%m/%Y") %></span><span class="time"><%= s.time.strftime("%I:%M%p").downcase! %></span></a></li>
-    <% end %>
-  </ol>
+<% %w{north south}.each do |loc| %>
+<section class="<%= loc %>">
+  <h2><%= loc.capitalize %></h2>
+  <%= render :partial => 'shared/statuses_list', :locals => { :statuses => @statuses, :loc => loc } %>
 </section>
+<% end %>
 
-<section class="south">
-  <h2>South</h2>
-  <ol class="clearfix">
-    <% @statuses_south['statuses'].each do |s| %>
-      <li><a href="<%= statuses_url_for_day(s) %>"><em class="status <%= status_class(s) %>"><%= status_class(s).capitalize %></em><span class="date"><%= s.date.strftime("%d/%m/%Y") %></span><span class="time"><%= s.time.strftime("%I:%M%p").downcase! %></span></a></li>
-    <% end %>
-  </ol>
-</section>
 
 <h1>Since records began <small>(<%= @oldest_status.date.strftime("%m/%Y") %>)</small> <small><%= link_to('view all', statuses_path) %></small></h1>
-<section class="north">
-  <h2>North</h2>
-  <ul class="clearfix">
-    <li class="status no"><em>No</em><span><%= number_to_percentage(@statuses_north['no_percent'], :precision => 2, :strip_insignificant_zeros => true) %></span></li>
-    <li class="status yes"><em>Yes</em><span><%= number_to_percentage(@statuses_north['yes_percent'], :precision => 2, :strip_insignificant_zeros => true) %></span></li>
-  </ul>
-</section>
 
-<section class="south">
-  <h2>South</h2>
-  <ul class="clearfix">
-    <li class="status no"><em>No</em><span><%= number_to_percentage(@statuses_south['no_percent'], :precision => 2, :strip_insignificant_zeros => true) %></span></li>
-    <li class="status yes"><em>Yes</em><span><%= number_to_percentage(@statuses_south['yes_percent'], :precision => 2, :strip_insignificant_zeros => true) %></span></li>
-  </ul>
+<% %w{north south}.each do |loc| %>
+<section class="north">
+  <h2><%= loc.capitalize %></h2>
+  <%= render :partial => 'shared/percentages', :locals => { :no_percent => @statuses[loc.to_sym][:no_percent], :yes_percent => @statuses[loc.to_sym][:yes_percent] } %>
 </section>
+<% end %>

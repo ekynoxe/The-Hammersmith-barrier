@@ -1,10 +1,20 @@
 class HomeController < ApplicationController
     def index
-    	@today_status_north = Status.find(:last, :conditions => ["DATE(date) = DATE(?) and location = ?", Time.now, "north"])
-        @today_status_south = Status.find(:last, :conditions => ["DATE(date) = DATE(?) and location = ?", Time.now, "south"])
+    	@statuses = {
+    		:north => {
+    			:statuses => [],
+    			:today => nil
+    			},
+    		:south => {
+    			:statuses => [],
+    			:today => nil
+    			}
+    	}
 
-        @statuses_north = getStatuses(7, 'north')
-        @statuses_south = getStatuses(7, 'south')
+    	%w{north south}.each do |loc|
+    		@statuses[loc.to_sym] = getStatuses(7, loc)
+    		@statuses[loc.to_sym][:today] = Status.find(:last, :conditions => ["DATE(date) = DATE(?) and location = ?", Time.now, loc])
+    	end
 
         @oldest_status = Status.first(:order => "date asc")
     end

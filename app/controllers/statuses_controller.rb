@@ -1,18 +1,29 @@
 class StatusesController < ApplicationController
-	def index
-        @statuses_north = getStatuses(7, 'north')
-        @statuses_south = getStatuses(7, 'south')
+        def index
+                @statuses = {
+                        :north => {
+                                :statuses => [],
+                                :today => nil
+                                },
+                        :south => {
+                                :statuses => [],
+                                :today => nil
+                                }
+                }
 
-        @statuses_north['statuses'] = Status.find(:all, :order => "date desc", :conditions => ["location = ?", "north"])
-        @statuses_south['statuses'] = Status.find(:all, :order => "date desc", :conditions => ["location = ?", "south"])
-        
-        @oldest_status = Status.first(:order => "date asc")
-	end
+                %w{north south}.each do |loc|
+                        @statuses[loc.to_sym] = getStatuses(nil, loc)
+                        @statuses[loc.to_sym][:today] = Status.find(:last, :conditions => ["DATE(date) = DATE(?) and location = ?", Time.now, loc])
+                end
 
-    def show
-        @date = Time.utc(params[:year].to_s, params[:month].to_s, params[:day].to_s)
+                @oldest_status = Status.first(:order => "date asc")
+        end
 
-        @statuses_north = Status.find(:all, :conditions => ["DATE(date) = DATE(?) and location = ?", @date, "north"])
-        @statuses_south = Status.find(:all, :conditions => ["DATE(date) = DATE(?) and location = ?", @date, "south"])
-    end
+        def show
+                @date = Time.utc(params[:year].to_s, params[:month].to_s, params[:day].to_s)
+                @statuses = Hash.new
+
+                @statuses["north"] = Status.find(:all, :conditions => ["DATE(date) = DATE(?) and location = ?", @date, "north"])
+                @statuses["south"] = Status.find(:all, :conditions => ["DATE(date) = DATE(?) and location = ?", @date, "south"])
+        end
 end
